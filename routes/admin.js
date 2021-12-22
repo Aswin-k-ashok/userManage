@@ -4,7 +4,7 @@ var router = express.Router()
 // get admin panel 
 
 router.get('/',(req,res)=>{
-    res.send("admin panel")
+    res.render("admin")
 })
 
 module.exports = router;
