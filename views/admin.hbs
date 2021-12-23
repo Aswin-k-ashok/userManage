@@ -14,25 +14,27 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
+              <th scope="col">first name</th>
+              <th scope="col">last name</th>
+              <th scope="col">phone</th>
+              <th scope="col">e-mail</th>
             </tr>
           </thead>
           <tbody>
+            {{#each user}}
             <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
+              <td>{{index}}</td>
+              <td>{{this.fname}}</td>
+              <td>{{this.lname}}</td>
+              <td>{{this.number}}</td>
+              <td>{{this.mail}}</td>
               <td class="d-flex justify-content-end gap-2">
                 <a href="" class="btn btn-success">update</a>
                 <a href="" class="btn btn-warning">block</a>
                 <a href="" class="btn btn-danger">delete</a>
               </td>
             </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
