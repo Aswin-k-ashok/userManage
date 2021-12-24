@@ -6,7 +6,7 @@ var logger = require('morgan');
 var {create} = require('express-handlebars')
 var bodyParser = require ('body-parser')
 var db=require('./config/connection')
-
+const session = require('express-session')
 
 
 var loginRouter = require('./routes/login');
@@ -33,6 +33,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret:"key",
+  cookie:{maxAge:600000000}
+}))
+
+app.use((req, res, next)=>{
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next()
+ })
 
 app.use(bodyParser.urlencoded({extended:true}));
 

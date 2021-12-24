@@ -9,7 +9,7 @@
  
       <div class="col-md-12 col-lg-12">
         <h4 class="mb-3"></h4>
-        <form class="needs-validation" action="/signup" method="post" novalidate>
+        <form class="needs-validation" action="/addUser" method="post" novalidate>
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
@@ -61,15 +61,11 @@
               </div>
             </div>
 
-          {{#if admin}}
-           <a href="/" class="w-25 btn btn-warning btn-lg mt-5 mx-auto">back</a>
+    
+           <a href="/admin" class="w-25 btn btn-warning btn-lg mt-5 mx-auto">back</a>
           <button class="w-25 btn btn-success btn-lg mt-5 mx-auto" type="submit">add user</button>
           
-          {{else}}
-
-          <a href="/" class="w-25 btn btn-warning btn-lg mt-5 mx-auto">back</a>
-          <button class="w-25 btn btn-success btn-lg mt-5 mx-auto" type="submit">SIGN UP</button>
-          {{/if}}
+          
         </form>
       </div>
     </div>
