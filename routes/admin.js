@@ -1,6 +1,8 @@
 var express = require('express')
 var router = express.Router()
 var userHelpers = require('../helpers/user-helpers')
+var adminHelpers = require('../helpers/admin-helpers')
+const { response } = require('express')
 
 // get admin panel 
 
@@ -28,6 +30,16 @@ router.post('/addUser', (req, res) => {
       console.log(response)
     })
   })
+
+router.get('/deleteUser/:id',(req,res)=>{
+  let UserId = req.params.id
+  console.log(UserId);
+  adminHelpers.deleteUser(UserId).then((response)=>{
+    res.redirect('/admin')
+  })
+})
+
+
   
 
 

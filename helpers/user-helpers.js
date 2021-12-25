@@ -40,6 +40,7 @@ module.exports = {
                     resolve(response)
                 }else{
                     console.log(("wrong password, login failed"));
+
                     response.status = false
                     resolve({status:false})
                     
@@ -48,6 +49,7 @@ module.exports = {
         }
         else{
             console.log("incorrect username , login failed")
+            
             resolve({status:false})
         }
     })

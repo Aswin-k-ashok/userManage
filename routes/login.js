@@ -10,7 +10,9 @@ router.get('/', function (req, res, next) {
   if (req.session.loggedIn) {
     res.redirect('/home')
   } else {
-    res.render('login');
+
+    res.render('login',{"loginErr":req.session.loginErr});
+    req.session.loginErr = false
   }
 });
 
@@ -29,17 +31,13 @@ router.post('/', (req, res) => {    //admin login
     userHelpers.doLogin(req.body).then((response) => {
       if (response.status) {
         req.session.loggedIn = true
-      
+        req.session.loginErr = true
         req.session.user = response.user
         console.log("from the other admin router")
-        // res.redirect(url.format({
-        //   pathname:'/admin',
-        //   query:{
-        //     admin: true
-        //   }
-        // }))      
+      
          res.redirect('/admin')
       } else {
+        console.log(req.session.loginErr)
         res.redirect('/')
       }
     })
@@ -51,6 +49,7 @@ router.post('/', (req, res) => {    //admin login
         req.session.user = response.user
         res.redirect('/home')
       } else {
+        req.session.loginErr = true
         res.redirect('/')
       }
     })
