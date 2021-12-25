@@ -30,12 +30,12 @@ module.exports = {
     return new Promise(async(resolve,reject)=>{
         let loginStatus = false
         let response = {}
-        let user = await db.get().collection(collection.USER_COLLECTION).findOne({mail:userData.mail})
+        let user = await db.get().collection(collection.USER_COLLECTION).findOne({mail:userData.mail,isEnabled:true})
         if(user){
             bcrypt.compare(userData.password,user.password).then((status)=>{
                 if(status){
                     console.log("login sucess")
-                    response.status = true
+                    response.status = true 
                     response.user = user
                     resolve(response)
                 }else{

@@ -16,6 +16,14 @@ router.get('/', function (req, res, next) {
   }
 });
 
+// router.get('/',(req,res)=>{
+//   if(req.session.loggedIn && req.session.adminlog){
+//     res.redirect('/admin')
+//   }else{
+//     res.redirect('/')
+//   }
+// })
+
 router.get('/home', (req, res) => {
   let user = req.session.user
   var admin = false
@@ -32,6 +40,7 @@ router.post('/', (req, res) => {    //admin login
       if (response.status) {
         req.session.loggedIn = true
         req.session.loginErr = true
+        req.session.adminlog = true
         req.session.user = response.user
         console.log("from the other admin router")
       

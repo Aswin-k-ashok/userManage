@@ -9,11 +9,18 @@
 
      <div class="d-flex justify-content-between">
        <a href="admin/addUser" class="btn btn-success">Add User</a>
-     <a href="/logOut" class="btn btn-danger">log out</a>
+
+         <form action="" class="d-flex ">
+                  <input type="text" name="fname" placeholder="   search by user name" class="" id="Search" onkeyup="search()">
+
+                  <button class="w-25 btn btn-info mx-2" type="submit">search</button>
+                </form>
+
+       <a href="/logOut" class="btn btn-danger">log out</a>
      </div>
 
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-dark table-sm mt-4" id="admintable">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -32,9 +39,18 @@
               <td>{{this.number}}</td>
               <td>{{this.mail}}</td>
               <td class="d-flex justify-content-end gap-2">
-                <a href="" class="btn btn-success">update</a>
-                <a href="" class="btn btn-warning">block</a>
-                <a href="admin/deleteUser/{{this._id}}" class="btn btn-danger" onclick ="return confirm('are you want to delete {{this.fname}} ?')">delete</a>
+                <a href="/admin/editUser/{{this._id}}" class="btn btn-success">update</a>
+
+                {{#if this.isEnabled}}
+                <a href="/admin/disable-user/{{this._id}}" class="btn btn-warning">block</a>
+
+               {{else}}
+
+               <a href="/admin/enable-user/{{this._id}}" class="btn btn-warning"> Un-block</a>
+
+                {{/if}}
+
+                <a href="/admin/deleteUser/{{this._id}}" class="btn btn-danger" onclick ="return confirm('are you want to delete {{this.fname}} ?')">delete</a>
               </td>
             </tr>
             {{/each}}
