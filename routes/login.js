@@ -1,4 +1,5 @@
 var express = require('express');
+const session = require('express-session');
 const {
   response
 } = require('../app');
@@ -26,12 +27,15 @@ router.get('/', function (req, res, next) {
 
 router.get('/home', (req, res) => {
   let user = req.session.user
-  var admin = false
-  console.log(user, "user data",admin)
-  res.render('home', {
-    user,admin
-  })
+  if(req.session.loggedIn){
+
+    res.render('home',{user})
+  }else{
+    res.redirect('/')
+  }
 })
+
+
 
 router.post('/', (req, res) => {    //admin login
   console.log(req.body)
@@ -76,8 +80,13 @@ router.get('/logOut', (req, res) => {
 
 router.get('/signup', (req, res) => {
   var admin = false 
-  res.render('signup',{admin})
-  console.log(admin ,"from sign up rute")
+  if(req.session.loggedIn){
+    res.redirect('/home')
+  }else{
+    res.render('signup',{admin})
+
+  }
+  
 });
 
 

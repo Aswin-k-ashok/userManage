@@ -38,10 +38,10 @@ app.use(session({
   cookie:{maxAge:600000000}
 }))
 
-app.use((req, res, next)=>{
-  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-  next()
- })
+// app.use((req, res, next)=>{
+//   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+//   next()
+//  })
 
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -53,6 +53,11 @@ db.connect((err)=>{
 app.use('/', loginRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+
+app.use(function(req, res, next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

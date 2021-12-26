@@ -18,7 +18,7 @@ module.exports = {
 
   doSignup:(userData)=>{
       return new Promise(async(resolve,reject)=>{
-
+        userData.isEnabled =true
           userData.password = await bcrypt.hash(userData.password,10)
           console.log(userData);
           db.get().collection(collection.USER_COLLECTION).insertOne(userData)
